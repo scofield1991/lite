@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^lite/', include('lite_app.urls')),
+    url(r'^captcha/', include('captcha.urls')),
 )
 
 

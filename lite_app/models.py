@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
-
+from captcha.fields import CaptchaField
 # Create your models here.
 class UserProfile(models.Model):
 
@@ -11,6 +11,7 @@ class UserProfile(models.Model):
     phone_number= models.CharField(validators=[phone_regex], blank=True, max_length=10)
     picture= models.ImageField(upload_to='profile_images', blank=True)
     birthday= models.DateField()
+    captcha= CaptchaField()
     
     def __str__(self):
         return self.user.username

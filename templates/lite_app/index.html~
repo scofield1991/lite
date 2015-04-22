@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+
+    <head>
+        <title>Lite_home</title>
+    </head>
+
+    <body>
+        <h1>Whatever text</h1>
+        hello world! <strong>{{ boldmessage }}</strong><br />
+        <strong>{{ cur_user.phone }}</strong><br />
+        <a href="/lite/about/">About</a><br />
+
+        <a href="/lite/register/">Register Here</a>
+
+        {% if user.is_authenticated %}
+            <a href="/lite/logout/">Logout</a>
+            <h1>I say... hello {{ user.username }}!</h1>
+            <h1>{{  cur_user.birthday }}</h1>
+            <img src= {{  cur_user.picture }}>
+        {% else %}
+            <a href="/lite/login/">Login</a>
+            <h1>I say... hello world!</h1>
+        {% endif %}
+
+	<img src="{% static "images/harry.jpg" %}" alt="Picture of Harry" />
+    </body>
+
+</html>

@@ -3,21 +3,25 @@ from django.http import HttpResponse, HttpResponseRedirect
 from lite_app.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 def index(request):
-    context_dict = {'boldmessage': 'Hi there!'}
+    current_user=request.user
+    context_dict = {'boldmessage': 'Hi there!', "cur_user":current_user}
     return render(request, 'lite_app/index.html', context_dict)
 
 
 def register(request):
-
+    args={}
     registered=False
 
     if request.method=='POST':
         user_form=UserForm(data=request.POST)
         profile_form=UserProfileForm(data=request.POST)
-
+        args['user_form']=user_form
+        args['profile_form']=profile_form
         if user_form.is_valid() and profile_form.is_valid():
             user=user_form.save()
             user.set_password(user.password)
@@ -32,6 +36,21 @@ def register(request):
             profile.save()
 
             registered=True
+            
+            username = user_form.cleaned_data['username']
+            email = user_form.cleaned_data['email']
+            password = user_form.cleaned_data['password']
+            
+            return HttpResponseRedirect('/lite/')
+            
+            #email_subject = 'Подтверждение регистрации'
+            #email_body = "Hey {0}, thanks for signing up. Here is your username: {0}, and password: {1}".format(username, password)
+            #if username and email and password:
+            #    send_mail(email_subject, email_body, settings.EMAIL_HOST_USER,
+            #            [email], fail_silently=False)
+            #    return HttpResponseRedirect('/lite/')
+            #else:
+            #    pass
 
         else:
             print (user_form.errors, profile_form.errors)

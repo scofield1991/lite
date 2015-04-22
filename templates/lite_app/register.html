@@ -22,9 +22,13 @@
             <!-- Display each form. The as_p method wraps each element in a paragraph
                  (<p>) element. This ensures each element appears on a new line,
                  making everything look neater. -->
-            {{ user_form.as_p }}
+            <!--{{ user_form.as_p }}-->
             {{ profile_form.as_p }}
-
+            <div class="fieldWrapper"><label>Имя </label>{{ user_form.first_name }} {{ user_form.errors.first_name}}</div>
+            <div class="fieldWrapper"><label>Фамилия </label>{{ user_form.last_name }} {{ user_form.errors.last_name}}</div>
+            <div class="fieldWrapper"><label>Логин </label>{{ user_form.username }} {{ user_form.errors.username}}</div>
+            <div class="fieldWrapper"><label>Пароль </label>{{ user_form.password }}{{ user_form.errors.password}}</div>
+            <div class="fieldWrapper"><label>E-mail </label>{{ user_form.email }} {{ user_form.email.errors }}</div>
             <!-- Provide a button to click to submit the form. -->
             <input type="submit" name="submit" value="Register" />
         </form>
