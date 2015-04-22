@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from lite_app.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from lite_app.models import UserProfile
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
 # Create your views here.
@@ -86,3 +88,13 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/lite/')
+
+@login_required
+def user_profile(request):
+     if request.method == 'GET':
+        current_user=request.user.id
+        user=User.objects.get(id=current_user)
+        userp=UserProfile.objects.get(user=current_user)
+        profile_form= UserProfileForm()
+        context_dict={'cur_user':current_user, 'user':user, 'userp':userp, 'profile_form':profile_form}
+        return render(request, 'lite_app/profile.html', context_dict)
