@@ -1,13 +1,10 @@
-<!DOCTYPE html>
+{% extends 'lite_app/base.html' %}
+
 {% load staticfiles %}
 
-<html>
+{% block title %}Lite{% endblock %}
+   {% block body_block %}
 
-    <head>
-        <title>Lite_home</title>
-    </head>
-
-    <body>
         <h1>Whatever text</h1>
         hello world! <strong>{{ boldmessage }}</strong><br />
         <strong>{{ cur_user }}</strong><br />
@@ -27,6 +24,7 @@
         {% endif %}
 
 	<img src="{% static "images/harry.jpg" %}" alt="Picture of Harry" />
-    </body>
+           </div>
 
+{% endblock %}
 </html>

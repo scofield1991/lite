@@ -8,26 +8,15 @@
         <script src={% static "js/client-ajax.js" %}></script>
         <script src={% static "js/client-jquery.js" %}></script>
         <script src={% static "js/jquery-ui.min.js" %}></script>
-        <script src={% static "js/bootstrap.min.js" %}></script>
         <link rel="stylesheet" href={% static "css/jquery-ui.min.css" %}>
-        <link rel="stylesheet" href={% static "css/bootstrap.min.css" %}>
-    <style type="text/css">
-body{
-    text-align:center; /* or you can also set 900px*/
-    color: #380000 ;
-
-}
-#page-wrap {
-     width: 60%;
-     margin: 0 auto;
-}
-</style>
+        <script>
+        
+</script>
 </head>
 <body>
-
 <p>{{ cur_user }}</p>
 <p>{{ user.username }}</p>
-<!--{{ profile_form.as_p }}-->
+{{ profile_form.as_p }}
 {{ profile_change_form.as_p }}
 
     <button id='del'>Try it</button>
@@ -53,6 +42,5 @@ function myFunction() {
         <input name="last_name" id="last_name" value="{{ user.last_name }}"></input><br />
         <input name="email" id="email" value="{{ user.email }}"></input><br />
         <input name="password" id="password" value=""></input><br />
-</div>
 </body>
 </html>
