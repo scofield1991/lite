@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from lite_app.forms import UserForm, UserProfileForm
+from lite_app.forms import UserForm, UserProfileForm, UserFormChange, UserProfileFormChange
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from lite_app.models import UserProfile
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
 # Create your views here.
@@ -86,3 +88,22 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/lite/')
+        
+def delete_profile(request):
+    current_user=request.user.id
+    user=User.objects.get(id=current_user)
+    user.delete()
+    #userp=UserProfile.objects.get(user=current_user)
+    return HttpResponseRedirect('/lite/')
+    #return HttpResponse("Your account is inactive!")
+
+@login_required
+def user_profile(request):
+     if request.method == 'GET':
+        current_user=request.user.id
+        user=User.objects.get(id=current_user)
+        userp=UserProfile.objects.get(user=current_user)
+        profile_form= UserProfileForm()
+        profile_change_form= UserProfileFormChange()
+        context_dict={'cur_user':current_user, 'user':user, 'userp':userp, 'profile_form':profile_form, 'profile_change_form': profile_change_form}
+        return render(request, 'lite_app/profile.html', context_dict)
