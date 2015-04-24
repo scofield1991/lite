@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from lite_app.forms import UserForm, UserProfileForm
+from lite_app.forms import UserForm, UserProfileForm, UserFormChange, UserProfileFormChange
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from lite_app.models import UserProfile
@@ -103,6 +103,11 @@ def user_profile(request):
         current_user=request.user.id
         user=User.objects.get(id=current_user)
         userp=UserProfile.objects.get(user=current_user)
-        profile_form= UserProfileForm()
-        context_dict={'cur_user':current_user, 'user':user, 'userp':userp, 'profile_form':profile_form}
+        user_form=UserForm(initial={'username':user.username, "first_name":user.first_name,
+         'last_name':user.last_name, 'email':user.email})
+        profile_form= UserProfileForm(initial={'phone_number':userp.phone_number, 'birthday': userp.birthday, 'picture':userp.picture)
+        profile_change_form= UserProfileFormChange()
+        context_dict={'cur_user':current_user, 'user':user, 'userp':userp, 'profile_form':profile_form, 'profile_change_form': profile_change_form, 'user_form':user_form}
         return render(request, 'lite_app/profile.html', context_dict)
+     if request.method == 'POST':
+        return HttpResponseRedirect('/lite/')

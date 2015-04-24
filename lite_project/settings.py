@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'lite_app',
     'captcha',
+    'widget_tweaks'
 )
 
 MIDDLEWARE_CLASSES = (

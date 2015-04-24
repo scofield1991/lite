@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Lite</title>
-</head>
-<body>
- <body>
+{% extends 'lite_app/base.html' %}
+
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block title %}Lite{% endblock %}
+   {% block body_block %}
         <h1>Register with Rango</h1>
 
         {% if registered %}
         Rango says: <strong>thank you for registering!</strong>
         <a href="/lite/">Return to the homepage.</a><br />
         {% else %}
-        Rango says: <strong>register here!</strong><br />
 
-        <form id="user_form" method="post" action="/lite/register/"
+        <form id="myform" method="post" action="/lite/register/"
                 enctype="multipart/form-data">
 
             {% csrf_token %}
@@ -23,28 +21,21 @@
                  (<p>) element. This ensures each element appears on a new line,
                  making everything look neater. -->
             <!--{{ user_form.as_p }}-->
-            {{ profile_form.as_p }}
-            <div class="fieldWrapper"><label>Имя </label>{{ user_form.first_name }}</div>
-            {% if user_form.errors %}
-            <strong>{{ user_form.errors.first_name}}</strong>
-            {% endif %}
-            <div class="fieldWrapper"><label>Фамилия </label>{{ user_form.last_name }}</div>
-            {% if user_form.errors %}
-            <strong>{{ user_form.errors.last_name}}</strong>
-            {% endif %}
-            <div class="fieldWrapper"><label>Логин </label>{{ user_form.username }}</div>
-            {% if user_form.errors %}
-            <strong>{{ user_form.errors.username}}</strong>
-            {% endif %}
-            <div class="fieldWrapper"><label>Пароль </label>{{ user_form.password }}{{ user_form.errors.password}}</div>
-            {% if user_form.errors %}
-            <strong></strong>
-            {% endif %}
-            <div class="fieldWrapper"><label>E-mail </label>{{ user_form.email }} {{ user_form.email.errors }}</div>
+            <!--{{ profile_form.as_p }}-->
+            <div class="fieldWrapper"><label>Имя </label>{{ user_form.first_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.first_name}}</div>
+            <div class="fieldWrapper"><label>Фамилия </label>{{ user_form.last_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.last_name}}</div>
+            <div class="fieldWrapper"><label>Логин </label>{{ user_form.username|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.username}}</div>
+            <div class="fieldWrapper"><label>Пароль </label>{{ user_form.password|add_class:"form-control"|add_error_class:"error" }}{{ user_form.errors.password}}</div>
+            <div class="fieldWrapper"><label>E-mail </label>{{ user_form.email|add_class:"form-control" }} {{ user_form.email.errors|add_error_class:"error" }}</div>
+            <div class="fieldWrapper"><label>Номер телефона </label>{{ profile_form.phone_number|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.phone_number.errors }}</div>
+            <div class="fieldWrapper"><label>День Рождения </label>{{ profile_form.birthday|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.birthday.errors }}</div>
             <!-- Provide a button to click to submit the form. -->
             <input type="submit" name="submit" value="Register" />
         </form>
+        
+        <button id="about-btn">lol</button>
+<p id="msg">prp</p>
         {% endif %}
 
-</body>
+{% endblock %}
 </html>

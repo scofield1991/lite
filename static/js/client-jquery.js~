@@ -1,11 +1,11 @@
-//$(document).ready( function() {
-//
-//    $("#about-btn").click( function(event) {
-//          $("#msg").html('alloha!')
-//        msgstr = msgstr + "o"
-//        $("#msg").html(msgstr) 
-//});
-//});
+$(document).ready( function() {
+
+    $("#about-btn").click( function(event) {
+          $("#msg").html('alloha!')
+        msgstr = msgstr + "o"
+        $("#msg").html(msgstr) 
+});
+});
 //$(document).ready( function() {
 //  $("#date").click( function(event) {
 //      $( "#date" ).datepicker();
@@ -18,6 +18,29 @@
 //$(function myFunction() {
 //    alert("Hello\nHow are you?");
 //});
+$('.fieldWrapper').blur(function() {
+	  if($(this).val().length == 0) {
+	    $(this)
+	      .addClass('error')
+	      .after('<span class="error">This field must be filled in!</span>');
+	  }
+	});
+	$('.fieldWrapper').focus(function() {
+	  $(this)
+	    .removeClass('error')
+	    .next('span')
+	    .remove();
+	  });
+	  
+$('#myform').bind('submit', function(event) {
+	  $('[type=text]').each(function() {
+	    if(!$(this).val().length) {
+	      event.preventDefault();
+	      $(this).css('border', '2px solid red');
+	    }
+	  });
+	});
+	
 
 $('#del').click(function myFunction() {
     confirm("Press a button!");

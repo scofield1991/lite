@@ -6,7 +6,7 @@ from captcha.fields import CaptchaField
 class UserForm(forms.ModelForm):
     password=forms.CharField(widget=forms.PasswordInput(), min_length=6, max_length=16)
     email=forms.EmailField()
-    first_name=forms.CharField()
+    first_name=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     last_name=forms.CharField()
     class Meta:
         model = User
