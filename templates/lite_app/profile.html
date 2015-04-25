@@ -6,8 +6,8 @@
 {% block title %}Lite{% endblock %}
    {% block body_block %}
 
-<!--<p>{{ cur_user }}</p>
-<p>{{ user.username }}</p>-->
+{{ cur_user }}
+{{ user.username }}
 <!--{{ profile_form.as_p }}-->
 <!--{{ profile_change_form.as_p }}-->
 
@@ -26,15 +26,22 @@ function myFunction() {
             {% csrf_token %}
         <div class="fieldWrapper"><label>Имя </label>{{ user_form.first_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.first_name}}</div>
          <div class="fieldWrapper"><label>Фамилия </label>{{ user_form.last_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.last_name}}</div>
-            <div class="fieldWrapper"><label>Логин </label>{{ user_form.username|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.username}}</div>
+            {% if error %}
+            <div class="fieldWrapper"><label>Логин </label>{{ user_form.username|add_class:"form-control"|add_error_class:"error" }} <p >{{ error|add_error_class:"error" }}</p></div>
+            {% else %}
+            <div class="fieldWrapper"><label>Логин </label>{{ user_form.username|add_class:"form-control" }} </div>
+            {% endif %}
+
             <div class="fieldWrapper"><label>Пароль </label>{{ user_form.password|add_class:"form-control"|add_error_class:"error" }}{{ user_form.errors.password}}</div>
             <div class="fieldWrapper"><label>E-mail </label>{{ user_form.email|add_class:"form-control"|add_error_class:"error" }} {{ user_form.email.errors }}</div>
             <div class="fieldWrapper"><label>Номер телефона </label>{{ profile_form.phone_number|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.phone_number.errors }}</div>
             <div class="fieldWrapper"><label>День Рождения </label>{{ profile_form.birthday|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.birthday.errors }}</div>
-        
+            <div class="fieldWrapper"><label>Иконка </label>
+                <img src={{ MEDIA_URL }}{{ user.userprofile.picture }}><br />
+                {{ profile_form.picture}}</div>
         <input type="submit" name="submit" value="Submit" />
         </form>
-        <a href="delete_profile" method="get" value="{{ user.username }}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+        <a href="delete_profile" class="btn btn-large btn-primary" method="get" value="{{ user.username }}" onclick="return confirm('Are you sure you want to delete this item?');">Delete Profile</a>
         
         <!-- <form class="form-group"  method="post" action="/lite/profile/">
             {% csrf_token %}

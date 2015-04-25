@@ -5,12 +5,18 @@
 {% block title %}Lite{% endblock %}
    {% block body_block %}
 
+       <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!-- Global CSS
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">-->
+    <!-- Plugins CSS -->
+    <!--<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
         <h1>Whatever text</h1>
         hello world! <strong>{{ boldmessage }}</strong><br />
         <strong>{{ cur_user }}</strong><br />
-        <a href="/lite/about/">About</a><br />
+        <a href="/lite/about/">About</a><br />-->
 
-        <a href="/lite/register/">Register Here</a>
+       <!-- <a href="/lite/register/">Register Here</a>
 
         {% if user.is_authenticated %}
             <a href="/lite/logout/">Logout</a>
@@ -23,8 +29,141 @@
             <h1>I say... hello world!</h1>
         {% endif %}
 
-	<img src="{% static "images/harry.jpg" %}" alt="Picture of Harry" />
-           </div>
+
+           </div>-->
+       <div class="container">
+      <div class="jumbotron"> <h2 align="center">Curriculum vitae</h2>
+
+           <!-- ******HEADER****** -->
+    <header class="header">
+        <div class="container">
+            <img class="profile-image img-responsive pull-left" src={% static "images/profile.png" %} alt="James Lee" />
+            <div class="profile-content pull-left">
+                <h1 class="name">Oleksandr Teslenko</h1>
+                <h2 class="desc">Web App Developer</h2>
+                <a class="btn btn-cta-primary pull-right" href="/lite/contacts/" target="_blank"><i class="fa fa-paper-plane"></i> Contact Me</a>
+
+            </div><!--//profile-->
+
+        </div><!--//container-->
+
+    </header><!--//header-->
+
+                  <section class="experience section">
+                    <div class="section-inner">
+                        <h2 class="heading">Work Experience</h2>
+                        <div class="content">
+                            <div class="item">
+                                <h3 class="title">Mathematical engineer - <span class="place"><a href="#">JSC Zaporizhstal, Zaporizhia (Ukraine)</a></span> <span class="year">(29/07/2013–Present)</span></h3>
+                                <p>-Datadases administration(Oracle 11g, MS SQL 2005,2008, MYSQL, Firebird, Redis);</p>
+                                <p>-System administration (Windows Server(2003, 2008,2012), Windows Clients(XP, 7), Linux(Debian,Ubuntu));</p>
+                                <p>-Participation in the development of algorithms of control systems for a given object management;</p>
+                                <p>-GUI development;</p>
+                                <p>-Web-application development;</p>
+                                <p>-Development of executive and operational documentation.</p>
+                            </div><!--//item-->
+                            <div class="item">
+                                <h3 class="title">Engineer in Production Control of Automated Systems - <span class="place"><a href="#">State Enterprise "Giproprom", Zaporizhia (Ukraine)</a></span> <span class="year">(15/03/2013–01/06/2013)</span></h3>
+                                <p>(Internship)</p>
+                                <p>-Commissioning and maintenance of automated process control system (upper and lower level);</p>
+                                <p>-Creation of projects for process automation;</p>
+                                <p>-Support for projects.</p>
+                            </div><!--//item-->
+
+                            <div class="item">
+                                <h3 class="title">Database administrator - <span class="place"><a href="#">Ltd. Sodruzhestvo Stroy, Zaporizhia (Ukraine)</a></span> <span class="year">(01/03/2012–01/09/2012)</span></h3>
+                                <p>(Part-time job)</p>
+                                <p>-Databases administration( MS SQL 2005);</p>
+                                <p>-Assistance in databases designing and development;</p>
+                            </div><!--//item-->
+
+                        </div><!--//content-->
+                        <div class="education">
+                        <h2 class="heading">Education</h2>
+                        <div class="content">
+                            <div class="item">
+                                <h3 class="title">Bachelor in Economics of Production - <span class="place"><a href="#">Kyiv Politech University, Kyiv (Ukraine)</a></span> <span class="year">(01/09/2014–Present)</span></h3>
+                                <p>(Part-time)</p>
+                                <p>Studied areas: Economics, Finance, Business Analytics, Statistics.</p>
+                            </div><!--//item-->
+                              <div class="item">
+                                <h3 class="title">Engineer in Production Control of Automated Systems - <span class="place"><a href="#">Zaporizhia State Engineering Academy, Zaporozhia (Ukraine)</a></span> <span class="year">(01/09/2012–25/06/2013)</span></h3>
+                                <p>Studied areas:IT, Electronics, Intellectual systems, Automatization,Control Systems</p>
+                                <p>Average grade:5.0 (five-point scale)</p>
+                            </div><!--//item-->
+                            <div class="item">
+                                <h3 class="title">Bachelor in Automatization and computer-integrated Technologies - <span class="place"><a href="#">Zaporizhia State Engineering Academy, Zaporozhia (Ukraine)</a></span> <span class="year">(01/09/2008–25/05/2012)</span></h3>
+                                <p>Studied areas:IT, Mathematics, Modeling, Software, Automatization,Control Systems</p>
+                                <p>Average grade:4.6 (five-point scale)</p>
+                            </div><!--//item-->
+                            </div>
+                    </div><!--//section-inner-->
+                      <div class="skills">
+                      <div class="section-inner">
+                        <h2 class="heading">Skills</h2>
+                        <div class="content">
+
+                            <div class="skillset">
+
+                                <div class="item">
+                                    <h3 class="level-title">Python &amp; Django<span class="level-label" data-toggle="tooltip" data-placement="left" data-animation="true" >Average</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="60%" style="width: 60%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+
+                                <div class="item">
+                                    <h3 class="level-title">SQL(T-SQL, PL\SQL)<span class="level-label">Average</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="60%" style="width: 60%">
+                                        </div>
+                                    </div><!--//level-bar-->
+
+                                </div><!--//item-->
+                                 <div class="item">
+                                    <h3 class="level-title">Databases(MSSQL, Oracle, MySQL, Postgres, Redis)<span class="level-label">Average</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="60%" style="width: 60%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+
+                                <div class="item">
+                                    <h3 class="level-title">Javascript, jQuery &amp; AJAX<span class="level-label">Beginner</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="30%" style="width: 30%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+
+                                <div class="item">
+                                    <h3 class="level-title">HTML5, CSS3, SASS &amp; LESS<span class="level-label">Beginner</span></h3>
+                                    <div class="level-bar">
+                                        <div class="level-bar-inner" data-level="30%" style="width: 30%">
+                                        </div>
+                                    </div><!--//level-bar-->
+                                </div><!--//item-->
+
+                            </div>
+                            </div>
+                        </div><!--//content-->
+                          </div>
+                    </div><!--//section-inner-->
+
+                </section><!--//section-->
+
+
+                  </div>
+© European Union, 2002-2015 | http://europass.cedefop.europa.eu
+
+
+
+</div>
+
+
+
 
 {% endblock %}
+
 </html>

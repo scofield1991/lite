@@ -4858,7 +4858,8 @@ a.badge:focus {
   margin-left: 3px;
 }
 .jumbotron {
-  padding: 30px 15px;
+    width: 70%;
+  padding: 15px 15px;
   margin-bottom: 30px;
   color: inherit;
   background-color: #eee;
@@ -6582,5 +6583,15 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+
+.error_r {
+color: #D8000C;
+background-color: #FFBABA;
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
 }
 /*# sourceMappingURL=bootstrap.css.map */

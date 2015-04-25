@@ -11,9 +11,15 @@
             Username: <input type="text" class="form-control" maxlength="30" placeholder="Username" name="username" value="" size="50" />
             <br />
             Password: <input type="password" class="form-control" maxlength="16" placeholder="Password" name="password" value="" size="50" />
-            <br />
 
-            <input type="submit" value="submit" />
+            <br />
+            {% if error %}
+            <div ><p class="error_r">{{ error }}</p></div>
+            {% endif %}
+            <p >{{ dict_inactive }}</p>
+
+            <input class="btn btn-large btn-primary " type="submit" value="submit" />
+
         </form>
 
 {% endblock %}

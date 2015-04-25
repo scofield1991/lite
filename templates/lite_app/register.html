@@ -5,10 +5,10 @@
 
 {% block title %}Lite{% endblock %}
    {% block body_block %}
-        <h1>Register with Rango</h1>
+        <h1>Registration Form</h1>
 
         {% if registered %}
-        Rango says: <strong>thank you for registering!</strong>
+         <strong>Thank you for registering!</strong>
         <a href="/lite/">Return to the homepage.</a><br />
         {% else %}
 
@@ -29,12 +29,14 @@
             <div class="fieldWrapper"><label>E-mail </label>{{ user_form.email|add_class:"form-control"|add_error_class:"error" }} {{ user_form.email.errors }}</div>
             <div class="fieldWrapper"><label>Номер телефона </label>{{ profile_form.phone_number|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.phone_number.errors }}</div>
             <div class="fieldWrapper"><label>День Рождения </label>{{ profile_form.birthday|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.birthday.errors }}</div>
+            <div class="fieldWrapper"><label>Введите надпись  </label> {{ profile_form.captcha|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.birthday.errors }}</div>
+            <br/>
             <!-- Provide a button to click to submit the form. -->
-            <input type="submit" name="submit" value="Register" />
+            <input class="btn btn-large btn-primary" type="submit" name="submit" value="Register" />
         </form>
         
-        <button id="about-btn">lol</button>
-<p id="msg">prp</p>
+        <br />
+            <br/>
         {% endif %}
 
 {% endblock %}
