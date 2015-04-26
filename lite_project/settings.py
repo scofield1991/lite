@@ -96,17 +96,17 @@ MEDIA_URL='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'scofield19991@gmail.com'
-EMAIL_HOST_PASSWORD = '17041991s'
+EMAIL_HOST_USER = 'mail@gmail.com'
+EMAIL_HOST_PASSWORD = 'password'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'scofield19991@gmail.com'
+DEFAULT_FROM_EMAIL = 'mail@gmail.com'
 
 #EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 #EMAIL_USE_TLS = False
 #EMAIL_PORT = 25
 #EMAIL_HOST = 'smtp.yandex.ru'
-#EMAIL_HOST_USER = 'scofield1991@yandex.ru'
-#EMAIL_HOST_PASSWORD = '17041991a'
-#DEFAULT_FROM_EMAIL = 'scofield1991@yandex.ru'
+#EMAIL_HOST_USER = 'mail@yandex.ru'
+#EMAIL_HOST_PASSWORD = ''
+#DEFAULT_FROM_EMAIL = 'mail@yandex.ru'
 AUTH_PROFILE_MODULE = 'lite_app.UserProfile'
