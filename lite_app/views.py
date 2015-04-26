@@ -7,6 +7,8 @@ from lite_app.models import UserProfile
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
+from django.core.files.images import get_image_dimensions
+from PIL import Image
 # Create your views here.
 
 def index(request):
@@ -32,8 +34,8 @@ def register(request):
             profile=profile_form.save(commit=False)
             profile.user=user
 
-            if 'picture' in request.FILES:
-                profile.picture=request.FILES['picture']
+            #if 'picture' in request.FILES:
+             #   profile.picture=request.FILES['picture']
 
             profile.save()
 
@@ -43,7 +45,7 @@ def register(request):
             email = user_form.cleaned_data['email']
             password = user_form.cleaned_data['password']
 
-            email_subject = 'Подтверждение регистрации'
+            email_subject = 'Registration'
             email_body = "Hey {0}, thanks for signing up. Here is your username: {0}, and password: {1}".format(username, password)
             if username and email and password:
                 send_mail(email_subject, email_body, settings.EMAIL_HOST_USER,
@@ -115,8 +117,8 @@ def user_profile(request):
         user_form=UserFormChange(initial={'username':user.username, "first_name":user.first_name,
          'last_name':user.last_name, 'email':user.email})
         #profile_form= UserProfileForm(initial={'phone_number':userp.phone_number, 'birthday': userp.birthday, 'picture':userp.picture})
-        profile_change_form= UserProfileFormChange(initial={'phone_number':userp.phone_number, 'birthday': userp.birthday, 'picture':userp.picture})
-        context_dict={'cur_user':current_user, 'user':user, 'userp':userp,  'profile_change_form': profile_change_form, 'user_form':user_form}
+        profile_form= UserProfileFormChange(initial={'phone_number':userp.phone_number, 'birthday': userp.birthday, 'picture':userp.picture})
+        context_dict={'cur_user':current_user, 'user':user, 'userp':userp,  'profile_change_form': profile_form, 'user_form':user_form}
         return render(request, 'lite_app/profile.html', context_dict)
      if request.method == 'POST':
         current_user=request.user.id
@@ -136,7 +138,7 @@ def user_profile(request):
             if User.objects.filter(username=username).exclude(pk=current_user).count() > 0:
                 error="Username has already been in use!"
                 return render(request, 'lite_app/profile.html',
-        {'user_form': user_form, 'profile_form':profile_form, 'error':error})
+        {'user_form': user_form, 'profile_change_form':profile_form, 'error':error})
                 #raise Exception('This display name is already in use.')
 
 
@@ -146,23 +148,47 @@ def user_profile(request):
             user.email=email
             if len(password) >0:
                 user.set_password(password)
-                #user.password=password
+
             user.save()
 
             userp.birthday=birthday
             userp.phone_number=phone_number
-            #profile=profile_form.save(commit=False)
-            #profile.user=user
+
 
             if 'picture' in request.FILES:
-                userp.picture=request.FILES['picture']
+                picture=clean_picture(request.FILES['picture'])
+                if picture==None:
+                    err_pic='Please use an image that is 100 x 100 pixels or smaller.'
+                    return render(request, 'lite_app/profile.html',
+        {'user_form': user_form, 'profile_change_form':profile_form, 'err_pic':err_pic})
+                else:
+                    userp.picture=picture
+
+                #userp.picture=request.FILES['picture']
+
+
             userp.save()
-            #profile.save()
+
             return HttpResponseRedirect('/lite/')
-        else:
-            print (user_form.errors, profile_form.errors)
+
         return render(request, 'lite_app/profile.html',
         {'user_form': user_form, 'profile_form':profile_form})
 
 def contacts(request):
     return render(request, 'lite_app/contacts.html', {})
+
+def clean_picture( picture):
+        pic = Image.open(picture)
+
+        try:
+            w, h = pic.size
+
+
+            max_width = max_height = 100
+            if w > max_width or h > max_height:
+                return None
+
+        except AttributeError:
+           
+            pass
+        return picture

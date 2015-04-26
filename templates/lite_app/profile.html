@@ -9,23 +9,24 @@
 
         <form class="form-group"  method="post" action="/lite/profile/" enctype="multipart/form-data">
             {% csrf_token %}
-        <div class="fieldWrapper"><label>Имя </label>{{ user_form.first_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.first_name}}</div>
-         <div class="fieldWrapper"><label>Фамилия </label>{{ user_form.last_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.last_name}}</div>
+        <div class="fieldWrapper"><label>First Name </label>{{ user_form.first_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.first_name}}</div>
+         <div class="fieldWrapper"><label>Last Name </label>{{ user_form.last_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.last_name}}</div>
             {% if error %}
-            <div class="fieldWrapper"><label>Логин </label>{{ user_form.username|add_class:"form-control"|add_error_class:"error" }} <p >{{ error|add_error_class:"error" }}</p></div>
+            <div class="fieldWrapper"><label>Username </label>{{ user_form.username|add_class:"form-control"|add_error_class:"error" }} <p >{{ error|add_error_class:"error" }}</p></div>
             {% else %}
-            <div class="fieldWrapper"><label>Логин </label>{{ user_form.username|add_class:"form-control" }} </div>
+            <div class="fieldWrapper"><label>Username </label>{{ user_form.username|add_class:"form-control" }} </div>
             {% endif %}
 
-            <div class="fieldWrapper"><label>Пароль </label>{{ user_form.password|add_class:"form-control"|add_error_class:"error" }}{{ user_form.errors.password}}</div>
+            <div class="fieldWrapper"><label>Password </label>{{ user_form.password|add_class:"form-control"|add_error_class:"error" }}{{ user_form.errors.password}}</div>
             <div class="fieldWrapper"><label>E-mail </label>{{ user_form.email|add_class:"form-control"|add_error_class:"error" }} {{ user_form.email.errors }}</div>
-            <div class="fieldWrapper"><label>Номер телефона </label>{{ profile_change_form.phone_number|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.phone_number.errors }}</div>
-            <div class="fieldWrapper"><label>День Рождения </label>{{ profile_change_form.birthday|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.birthday.errors }}</div>
-            <div class="fieldWrapper"><label>Иконка  </label>
+            <div class="fieldWrapper"><label>Phone number </label>{{ profile_change_form.phone_number|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.phone_number.errors }}</div>
+            <div class="fieldWrapper"><label>Birthday </label>{{ profile_change_form.birthday|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.birthday.errors }}</div>
+            <div class="fieldWrapper"><label>Picture  </label>
                 {% if user.userprofile.picture %}
                 <img src={{ MEDIA_URL }}{{ user.userprofile.picture }}>
                 {% endif %}
-                <input id="id_picture"  name="picture" type="file"></div><br />
+                <input id="id_picture"  name="picture" type="file"></div> {{ err_pic }}<br />
+
                <!-- {{ profile_change_form.picture}}-->
 
         <input type="submit" class="btn btn-large btn-primary" name="submit" value="Submit" /> <a href="delete_profile" class="btn btn-large btn-warning" method="get" value="{{ user.username }}" onclick="return confirm('Are you sure you want to delete this account?');">Delete Profile</a>

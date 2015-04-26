@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from lite_app.models import UserProfile
 from captcha.fields import CaptchaField
-
+from django.core.files.images import get_image_dimensions
 class UserForm(forms.ModelForm):
     password=forms.CharField(widget=forms.PasswordInput(), min_length=6, max_length=16)
     email=forms.EmailField()
@@ -32,4 +32,6 @@ class UserProfileFormChange(forms.Form):
     birthday=forms.DateField(input_formats=['%Y-%m-%d'])
     phone_number=forms.CharField()
     picture=forms.ImageField(required=False)
+
+
 
