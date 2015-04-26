@@ -3,26 +3,11 @@
 {% load staticfiles %}
 {% load widget_tweaks %}
 
-{% block title %}Lite{% endblock %}
+{% block title %}Profile{% endblock %}
    {% block body_block %}
 
-{{ cur_user }}
-{{ user.username }}
-<!--{{ profile_form.as_p }}-->
-<!--{{ profile_change_form.as_p }}-->
 
-  <!--  <button id='del'>Try it</button>
-    <button onclick="myFunction()">Try it</button>
-
-<script>
-function myFunction() {
-    confirm("Press a button!");
-}
-</script>
-
-        
-        <button href="" method="get" value="{{ user.username }}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button><br />-->
-        <form class="form-group"  method="post" action="/lite/profile/">
+        <form class="form-group"  method="post" action="/lite/profile/" enctype="multipart/form-data">
             {% csrf_token %}
         <div class="fieldWrapper"><label>Имя </label>{{ user_form.first_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.first_name}}</div>
          <div class="fieldWrapper"><label>Фамилия </label>{{ user_form.last_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.last_name}}</div>
@@ -34,39 +19,19 @@ function myFunction() {
 
             <div class="fieldWrapper"><label>Пароль </label>{{ user_form.password|add_class:"form-control"|add_error_class:"error" }}{{ user_form.errors.password}}</div>
             <div class="fieldWrapper"><label>E-mail </label>{{ user_form.email|add_class:"form-control"|add_error_class:"error" }} {{ user_form.email.errors }}</div>
-            <div class="fieldWrapper"><label>Номер телефона </label>{{ profile_form.phone_number|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.phone_number.errors }}</div>
-            <div class="fieldWrapper"><label>День Рождения </label>{{ profile_form.birthday|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.birthday.errors }}</div>
-            <div class="fieldWrapper"><label>Иконка </label>
-                <img src={{ MEDIA_URL }}{{ user.userprofile.picture }}><br />
-                {{ profile_form.picture}}</div>
-        <input type="submit" name="submit" value="Submit" />
+            <div class="fieldWrapper"><label>Номер телефона </label>{{ profile_change_form.phone_number|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.phone_number.errors }}</div>
+            <div class="fieldWrapper"><label>День Рождения </label>{{ profile_change_form.birthday|add_class:"form-control"|add_error_class:"error" }} {{ profile_form.birthday.errors }}</div>
+            <div class="fieldWrapper"><label>Иконка  </label>
+                {% if user.userprofile.picture %}
+                <img src={{ MEDIA_URL }}{{ user.userprofile.picture }}>
+                {% endif %}
+                <input id="id_picture"  name="picture" type="file"></div><br />
+               <!-- {{ profile_change_form.picture}}-->
+
+        <input type="submit" class="btn btn-large btn-primary" name="submit" value="Submit" /> <a href="delete_profile" class="btn btn-large btn-warning" method="get" value="{{ user.username }}" onclick="return confirm('Are you sure you want to delete this account?');">Delete Profile</a>
         </form>
-        <a href="delete_profile" class="btn btn-large btn-primary" method="get" value="{{ user.username }}" onclick="return confirm('Are you sure you want to delete this item?');">Delete Profile</a>
-        
-        <!-- <form class="form-group"  method="post" action="/lite/profile/">
-            {% csrf_token %}
-        <div class="fieldWrapper"><label>Имя </label>{{ user_form.first_name|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.first_name}}</div>
-        <label>Имя </label>
-        <input class="form-control" name="first_name" id="first_name" value="{{ user.first_name }}"></input><br />
-        <label>Фамилия </label>
-        <input class="form-control" name="last_name" id="last_name" value="{{ user.last_name }}"></input><br />
-        <label>Логин </label>
-        <input class="form-control" name="username" id="username" value="{{ user.username }}"></input><br />
-        <label>E-mail </label>
-        <input class="form-control" name="email" id="email" value="{{ user.email }}"></input><br />
-        <label>Пароль </label>
-        {{ user_form.password|add_class:"form-control"|add_error_class:"error" }}{{ user_form.errors.password}}
-        <label>Номер телефона </label>
-        <input name="phone" id="phone" value="{{ userp.phone_number }}" class="form-control" maxlength="16" ></input><br />
-        <label>День Рождения </label>
-        <input name="birthday" id="birthday" value="{{ userp.birthday }}" class="form-control"  ></input><br />
-        <!--<div class="fieldWrapper"><label>Номер телефона </label>{{ profile_change_form.phone_number|add_class:"form-control"|attr:"class:form-control" }} {{ profile_change_form.phone_number.errors }}</div>
-        <div class="fieldWrapper"><label>Иконка </label>{{ profile_form.picture }} {{ profile_form.picture.errors }}</div>
-        <div class="fieldWrapper"><label>Логин </label>{{ user_form.username|add_class:"form-control"|add_error_class:"error" }} {{ user_form.errors.username}}</div>
-        <input type="submit" name="submit" value="Submit" />
-        </form>
-        <a href="delete_profile" method="get" value="{{ user.username }}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-</div>-->
+        <div class="right"> </div>
+
 {% endblock %}
 
-</html>
+

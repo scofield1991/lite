@@ -26,6 +26,7 @@
 </head>
 <body>
 <div id="page-wrap">
+<div class="container">
  <div class="navbar navbar-inverse" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -44,8 +45,13 @@
                     {% if user.is_authenticated %}
                         <li><a href="/lite/profile/">Personal Profile</a></li>
                         <li><a href="/lite/logout/">Logout</a></li>
-                        <li><a href="/lite/login/">{{ user.first_name }} {{ user.last_name|slice:"1" }}.</a></li>
-                        <img src={{ MEDIA_URL }}{{ user.userprofile.picture }}>
+                        <li><a href="#">{{ user.first_name }} {{ user.last_name|slice:"1" }}.</a></li>
+                        {% if user.userprofile.picture %}
+
+                        <li><img src={{ MEDIA_URL }}{{ user.userprofile.picture }}></li>
+                            {% else %}
+                            <li><img src="/static/images/avatar.png"></li>
+                            {% endif %}
                     {% else %}
                         <li><a href="/lite/register/">Register Here</a></li>
                         <li><a href="/lite/login/">Login</a></li>
@@ -70,13 +76,16 @@
         </div>
       </div>
     </div>
-</div>
-<footer class="panel-footer navbar-fixed-bottom">
+<footer class="panel-footer navbar-fixed-bottom" id="page-wrap">
       <div class="navbar-inner">
           <div class="container">
          <p></p>
           </div>
           </div>
           </footer>
+</div>
+
+</div>
+
 </body>
 </html>

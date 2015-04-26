@@ -114,22 +114,25 @@ def user_profile(request):
         userp=UserProfile.objects.get(user=current_user)
         user_form=UserFormChange(initial={'username':user.username, "first_name":user.first_name,
          'last_name':user.last_name, 'email':user.email})
-        profile_form= UserProfileForm(initial={'phone_number':userp.phone_number, 'birthday': userp.birthday, 'picture':userp.picture})
+        #profile_form= UserProfileForm(initial={'phone_number':userp.phone_number, 'birthday': userp.birthday, 'picture':userp.picture})
         profile_change_form= UserProfileFormChange(initial={'phone_number':userp.phone_number, 'birthday': userp.birthday, 'picture':userp.picture})
-        context_dict={'cur_user':current_user, 'user':user, 'userp':userp, 'profile_form':profile_form, 'profile_change_form': profile_change_form, 'user_form':user_form}
+        context_dict={'cur_user':current_user, 'user':user, 'userp':userp,  'profile_change_form': profile_change_form, 'user_form':user_form}
         return render(request, 'lite_app/profile.html', context_dict)
      if request.method == 'POST':
         current_user=request.user.id
         user=User.objects.get(id=current_user)
         userp=UserProfile.objects.get(user=current_user)
         user_form=UserFormChange(data=request.POST)
-        profile_form=UserProfileForm(data=request.POST)
-        if user_form.is_valid() :
+        profile_form=UserProfileFormChange(data=request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
             username = user_form.cleaned_data['username']
             email = user_form.cleaned_data['email']
             password = user_form.cleaned_data['password']
             first_name=user_form.cleaned_data['first_name']
             last_name=user_form.cleaned_data['last_name']
+            phone_number=profile_form.cleaned_data['phone_number']
+            birthday=profile_form.cleaned_data['birthday']
+
             if User.objects.filter(username=username).exclude(pk=current_user).count() > 0:
                 error="Username has already been in use!"
                 return render(request, 'lite_app/profile.html',
@@ -146,13 +149,14 @@ def user_profile(request):
                 #user.password=password
             user.save()
 
-
+            userp.birthday=birthday
+            userp.phone_number=phone_number
             #profile=profile_form.save(commit=False)
             #profile.user=user
 
-            #if 'picture' in request.FILES:
-                #profile.picture=request.FILES['picture']
-
+            if 'picture' in request.FILES:
+                userp.picture=request.FILES['picture']
+            userp.save()
             #profile.save()
             return HttpResponseRedirect('/lite/')
         else:

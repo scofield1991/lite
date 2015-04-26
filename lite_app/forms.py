@@ -15,7 +15,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     birthday=forms.DateField(input_formats=['%Y-%m-%d'])
     captcha=CaptchaField()
-    phone_number=forms.CharField()
+    phone_number=forms.CharField( )
     class Meta:
         model = UserProfile
         fields=('phone_number', 'picture', 'birthday')
@@ -28,9 +28,8 @@ class UserFormChange(forms.Form):
     last_name=forms.CharField()
 
         
-class UserProfileFormChange(forms.ModelForm):
-    birthday=forms.DateField(input_formats=['%Y-%m-%d'],required=False)
-    phone_number=forms.CharField(required=False)
-    class Meta:
-        model = UserProfile
-        fields=('phone_number', 'picture', 'birthday')
+class UserProfileFormChange(forms.Form):
+    birthday=forms.DateField(input_formats=['%Y-%m-%d'])
+    phone_number=forms.CharField()
+    picture=forms.ImageField(required=False)
+
