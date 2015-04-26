@@ -7,5 +7,10 @@ pip install pillow
 pip install django-simple-captcha
 pip install django-widget-tweaks
 
+After that make migration:
+python manage.py migrate
+
+And add your email and password in settings.py.
+
 
   
